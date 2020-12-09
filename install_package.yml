@@ -1,0 +1,11 @@
+
+---
+- name: This playbook install packages in target servers
+  hosts: webservers
+  become: true
+
+  tasks:
+   - name: This task uninsatlls the git
+     yum: 
+       name: git,tree
+       state: latest    

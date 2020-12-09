@@ -1,0 +1,44 @@
+---
+- name: uninstall httpd/apache2 in managed nodes
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+  - name: check httpd status
+    service: 
+      name: httpd
+    register: service_status
+  
+  - name: print service output
+    debug:
+      msg: service_status.status.SubState      
+
+  - name: Stop httpd service
+    service:
+      name: httpd
+      state: stopped
+    when: "'dead' not in service_status.status.SubState"
+    ignore_errors: yes 
+    
+  - name: Remove httpde
+    yum: 
+      name: httpd
+      state: removed
+    when: ansible_os_family == "RedHat"
+    ignore_errors: yes
+
+  - name: Stop apache2 service
+    service:
+      name: apache2
+      state: stopped
+    when: ansible_os_family == "Debian"
+    ignore_errors: yes
+
+  - name: Remove apache2
+    apt:
+      name: apache2
+      state: absent
+    when: ansible_os_family == "Debian"
+    ignore_errors: yes
+

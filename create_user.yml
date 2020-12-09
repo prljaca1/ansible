@@ -1,0 +1,13 @@
+---
+- name: This playbook create user in RHEL and Ubuntu VMS
+  hosts: all
+  become: true
+  vars_files:
+    - user.yml       
+
+  tasks:
+  - name: Create  Adnan user for this project        
+    user:
+      name: "{{user}}"
+      state: present
+

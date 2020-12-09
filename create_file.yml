@@ -1,0 +1,25 @@
+---
+- name: this playbook creates file in targer servers
+  hosts: all
+  become: true
+  become_method: sudo
+  become_user: ansadmin
+
+  tasks:
+  - name: This task creates a file
+    file: 
+      path: /home/ansadmin/myfile
+      state: touch
+      owner: root
+      group: root
+      mode: 0777 
+
+  - name: This task create a directory
+    file:
+      path: /home/ansadmin/mydirectory
+      state: directory
+      owner: ansadmin
+      group: ansadmin
+      mode: 0600
+
+            

@@ -1,0 +1,10 @@
+---
+- name: Install git software in ansible managed nodes
+  hosts: webservers
+  become: true
+
+  tasks: 
+  - name: this tasks installs git package using yum
+    yum:
+      name: git
+      state: present      

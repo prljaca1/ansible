@@ -1,0 +1,11 @@
+---
+- name: check it hosts
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+  - name: do it       
+    file:
+      path: /opt/ansadmin/dir
+      state: directory      

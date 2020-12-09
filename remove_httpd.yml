@@ -1,0 +1,15 @@
+- name: This playbook remove apache on rhel family
+  hosts: webservers
+  become: true
+
+  tasks:
+  - name: Stop httpd service 
+    service:
+      name: httpd
+      state: stopped
+
+  - name: Remove httpd service
+    yum:
+      name: httpd
+      state: removed
+
