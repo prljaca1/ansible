@@ -1,0 +1,13 @@
+---
+- name: This playbook clones private git repo
+  hosts: all
+  become: true
+  vars_files: 
+    - vault-pass.yml
+
+  tasks:
+  - name: Clone the repo
+    git:
+      repo: https://prljaca1:{{ password }}@github.com/prljaca1/privaterepo.git       
+      dest: /opt/ansadmin/test-vault
+      

@@ -1,3 +1,4 @@
+---
 - name: This playbook installs apache on rhel family
   hosts: all
   become: true
@@ -8,32 +9,40 @@
       name: httpd
       state: installed
     when: ansible_os_family == "RedHat"   
-    tags: install_httpd
 
   - name: Start httpd service
     service:
       name: httpd
       state: started
     when: ansible_os_family == "RedHat"
-    tags: start_htppd
 
   - name: Install apache2
     apt:
       name: apache2
       state: present
     when: ansible_os_family == "Debian"
-    tags: install_apache2
-
+    
   - name: Start apach2 service
     service:
       name: apache2
       state: started
     when: ansible_os_family == "Debian"
-    tags: start_apache2
 
-  - name: Copy index.html to target servers
+ - name: Copy index.html to target servers
     copy: 
       src: /opt/ansible/index.html
       dest: /var/www/html
       mode: 0666
-        
+
+
+
+
+
+
+
+
+
+
+
+
+      
